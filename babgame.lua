@@ -1,7 +1,11 @@
 local babgame = {}
 
+local keycodes = {}
+for _, v in pairs(Enum.KeyCode:GetEnumItems()) do
+	keycodes[v.Value]=v
+end
+
 function babgame:load(TLcolor, BRcolor, inc)
-	self.keycodes = {} -- do not use (internal use only)
 	self.screen = {data={}}
 	self.keys = {data={}}
 	
@@ -31,9 +35,6 @@ function babgame:load(TLcolor, BRcolor, inc)
 	end
 	self.diff = (self.BR.PrimaryPart.Position-self.TL.PrimaryPart.Position)
 
-	for _, v in pairs(Enum.KeyCode:GetEnumItems()) do
-		self.keycodes[v.Value]=v
-	end
 
 	function self.screen.getPixel(pos2)
 	
@@ -53,7 +54,7 @@ function babgame:load(TLcolor, BRcolor, inc)
 
 	function self.keys.keyPressed(keyfunction)
 		for _, v in pairs(self.keys.data) do
-			v.BulbEnd.PointLight.Changed:Connect(keyfunction(self.keycodes[v.BindFire.Value]))
+			v.BulbEnd.PointLight.Changed:Connect(keyfunction(keycodes[v.BindFire.Value]))
 		end
 	end
 end
