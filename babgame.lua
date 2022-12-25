@@ -24,7 +24,7 @@ function babgame:load(TLcolor, BRcolor, TICKcolor, inc)
 	local function getGameBlocks(v)
 		if v.Name == 'NeonBlock' then
 			local entry = {}
-			local pos3 = v.PrimaryPart.Position-self.TL.Position -- get 3d relative position
+			local pos3 = v.PrimaryPart.Position-self.TL.PrimaryPart.Position -- get 3d relative position
 
 			if pos3.x == 0 then
 				entry.pos2 = Vector2.new(math.abs(pos3.z), math.abs(pos3.y))
