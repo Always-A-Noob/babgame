@@ -16,11 +16,21 @@ function babgame:load(TLcolor, BRcolor, TICKcolor, inc)
 		elseif v.PrimaryPart.Color == BRcolor then
 			self.BR=v -- bottom right corner
 		elseif v.PrimaryPart.Color == TICKcolor then
-			self.TICK=v -- bottom right corner
+			self.TICK=v -- ticker
 		end
 		
 		if v.Name == 'NeonBlock' then
-			self.screen.data[#self.screen.data+1]=v -- get screen blocks
+			self.screen.data[#self.screen.data+1] = {}
+			local entry = self.screen.data[#self.screen.data+1] -- get screen blocks
+			local pos3 = v.PrimaryPart.Position-self.TL.Position
+
+			if pos3.x == 0 then
+				entry.pos2 = Vector2.new(math.abs(pos3.z), math.abs(pos3.y)))
+			else -- pos3.z == 0
+				entry.pos2 = Vector2.new(math.abs(pos3.x), math.abs(pos3.y))
+			end
+			entry.block = v
+
 		elseif v.Name == 'LightBulb' then
 			self.keys.data[#self.keys.data+1]=v -- get keybinds
 		end
@@ -36,14 +46,15 @@ function babgame:load(TLcolor, BRcolor, TICKcolor, inc)
 			end
 		end
 	end
-	self.diff = (self.BR.PrimaryPart.Position-self.TL.PrimaryPart.Position)
 
 	function self.screen.setPixel(pos2, color)
-
+		
 	end
 
 	function self.screen.getPixel(pos2)
-
+		for _, v in pairs(self.screen) do
+			
+		end
 	end
 
 	function self.keys.keyPressed(keyfunction)
@@ -90,7 +101,7 @@ function babgame:debug() -- dont
 end
 
 function babgame:tick()
-
+	self.screen.setPixel()
 end
 
 function babgame:update(drawfunction)
@@ -104,9 +115,13 @@ function babgame:update(drawfunction)
 		end
 
 		drawfunction()
-		
+
 		self:tick()
 	end
+end
+
+function babgame:paint(color)
+
 end
 
 return babgame
