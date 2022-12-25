@@ -90,7 +90,9 @@ end
 function babgame:draw()
 	for _, v in pairs(self.screen.data) do
 		spawn(function()
-			self.screen.setPixel(v.pos2, self.backgroundColor)
+			if self.screen.getPixel(v.pos2) ~= self.backgroundColor then
+				self.screen.setPixel(v.pos2, self.backgroundColor)
+			end
 		end)
 	end
 end
