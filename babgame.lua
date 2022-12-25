@@ -53,8 +53,9 @@ function babgame:load(TLcolor, BRcolor, inc)
 	end
 
 	function self.keys.keyPressed(keyfunction)
+		print('why :(')
 		print(type(self.keys.data))
-		
+
 		for _, v in pairs(self.keys.data) do
 			v.BulbEnd.PointLight.Changed:Connect(keyfunction(keycodes[v.BindFire.Value]))
 		end
