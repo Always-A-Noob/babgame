@@ -6,9 +6,10 @@ for _, v in pairs(Enum.KeyCode:GetEnumItems()) do
 end
 
 function babgame:load(TLcolor, BRcolor, inc)
+	self.backgroundColor = Color3.new(0, 0, 0)
 	self.screen = {data={}}
 	self.keys = {data={}}
-	
+
 	local function handleBlock(v)
 		if v.PrimaryPart.Color == TLcolor then
 			self.TL=v -- top left corner
@@ -22,7 +23,7 @@ function babgame:load(TLcolor, BRcolor, inc)
 			self.keys.data[#self.keys.data+1]=v -- get keybinds
 		end
 	end
-
+	
 	for _, v in pairs(workspace:GetChildren()) do
 		local tag = v:FindFirstChild('Tag')
 		-- check if it is a player-placed block
@@ -35,21 +36,12 @@ function babgame:load(TLcolor, BRcolor, inc)
 	end
 	self.diff = (self.BR.PrimaryPart.Position-self.TL.PrimaryPart.Position)
 
+	function self.screen.setPixel(pos2, color)
+
+	end
 
 	function self.screen.getPixel(pos2)
-	
-	end
 
-	function self.screen.setPixel(pos2)
-
-	end
-	
-	function self.screen.pixelToWorld(pos2)
-	
-	end
-	
-	function self.screen.worldToPixel(pos3)
-	
 	end
 
 	function self.keys.keyPressed(keyfunction)
@@ -60,6 +52,15 @@ function babgame:load(TLcolor, BRcolor, inc)
 				end
 			end)
 		end
+	end
+
+	function self.keys.getKeys()
+		local _keys = {}
+		for _, v in pairs(self.keys.data) do
+			_keys[#_keys+1] = keycodes[v.BindFire.Value]
+		end
+
+		return _keys
 	end
 end
 
@@ -83,6 +84,14 @@ function babgame:debug() -- dont
 				t.Position = Vector3.new(x, y, 0)+self.TL.PrimaryPart.Position
 			end
 		end	
+	end
+end
+
+function babgame:draw()
+	for _, v in pairs(self.screen.data) do
+		spawn(function()
+			self.screen.setPixel(v.pos2, self.backgroundColor)
+		end)
 	end
 end
 
