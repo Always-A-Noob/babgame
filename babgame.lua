@@ -25,7 +25,7 @@ function babgame:load(TLcolor, BRcolor, TICKcolor, inc)
 			local pos3 = v.PrimaryPart.Position-self.TL.Position
 
 			if pos3.x == 0 then
-				entry.pos2 = Vector2.new(math.abs(pos3.z), math.abs(pos3.y)))
+				entry.pos2 = Vector2.new(math.abs(pos3.z), math.abs(pos3.y))
 			else -- pos3.z == 0
 				entry.pos2 = Vector2.new(math.abs(pos3.x), math.abs(pos3.y))
 			end
@@ -48,7 +48,7 @@ function babgame:load(TLcolor, BRcolor, TICKcolor, inc)
 	end
 
 	function self.screen.setPixel(pos2, color)
-		
+
 	end
 
 	function self.screen.getPixel(pos2)
