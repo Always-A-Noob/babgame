@@ -11,7 +11,7 @@ function babgame:load(TLcolor, BRcolor, TICKcolor, inc)
 	self.screen = {data={}}
 	self.keys = {data={}}
 
-	local function handleBlock(v)
+	local function getSpecialBlocks(v)
 		if v.PrimaryPart.Color == TLcolor then
 			self.TL=v -- top left corner
 		elseif v.PrimaryPart.Color == BRcolor then
@@ -19,7 +19,9 @@ function babgame:load(TLcolor, BRcolor, TICKcolor, inc)
 		elseif v.PrimaryPart.Color == TICKcolor then
 			self.TICK=v -- ticker
 		end
-		
+	end
+
+	local function getGameBlocks(v)
 		if v.Name == 'NeonBlock' then
 			local entry = {}
 			local pos3 = v.PrimaryPart.Position-self.TL.Position -- get 3d relative position
@@ -37,16 +39,20 @@ function babgame:load(TLcolor, BRcolor, TICKcolor, inc)
 		end
 	end
 	
-	for _, v in pairs(workspace:GetChildren()) do
-		local tag = v:FindFirstChild('Tag')
-		-- check if it is a player-placed block
-		if tag then
-			-- check if owner is me
-			if tag.Value == player.Name then
-				handleBlock(v)
+	local function getMyBlocks(func)
+		for _, v in pairs(workspace:GetChildren()) do
+			local tag = v:FindFirstChild('Tag')
+			-- check if it is a player-placed block
+			if tag then
+				-- check if owner is me
+				if tag.Value == player.Name then
+					func(v)
+				end
 			end
 		end
 	end
+	getMyBlocks(getSpecialBlocks)
+	getMyBlocks(getGameBlocks)
 
 	function self.screen.setPixel(pos2, color, yield)
 		for _, v in pairs(self.screen) do
