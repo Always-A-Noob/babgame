@@ -55,8 +55,9 @@ function babgame:load(TLcolor, BRcolor, inc)
 	function self.keys.keyPressed(keyfunction)
 		for _, v in pairs(self.keys.data) do
 			v.BulbEnd.PointLight.Changed:Connect(function(v) 
-			if v == 'Enabled' then 
-				keyfunction(keycodes[v.BindFire.Value]) 
+				if v == 'Enabled' then 
+					keyfunction(keycodes[v.BindFire.Value]) 
+				end
 			end)
 		end
 	end
