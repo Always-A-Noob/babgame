@@ -5,7 +5,7 @@ for _, v in pairs(Enum.KeyCode:GetEnumItems()) do
 	keycodes[v.Value]=v
 end
 
-function babgame:load(TLcolor, BRcolor, inc)
+function babgame:load(TLcolor, BRcolor, TICKcolor, inc)
 	self.backgroundColor = Color3.new(0, 0, 0)
 	self.screen = {data={}}
 	self.keys = {data={}}
@@ -15,6 +15,8 @@ function babgame:load(TLcolor, BRcolor, inc)
 			self.TL=v -- top left corner
 		elseif v.PrimaryPart.Color == BRcolor then
 			self.BR=v -- bottom right corner
+		elseif v.PrimaryPart.Color == TICKcolor then
+			self.TICK=v -- bottom right corner
 		end
 		
 		if v.Name == 'NeonBlock' then
