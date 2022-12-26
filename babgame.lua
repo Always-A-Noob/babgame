@@ -163,4 +163,5 @@ function babgame:paint(block, color, yield)
 	end
 end
  
+print('BABGAME module')
 return babgame
