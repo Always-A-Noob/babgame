@@ -80,12 +80,6 @@ function babgame:load(TLcolor, BRcolor, TICKcolor, inc)
 			v.BulbEnd.PointLight.Changed:Connect(function(value) 
 				if value == 'Enabled' then 
 					local key = keycodes[v.BindFire.Value]
-					print(typeof(key))
-					print(typeof(keyfunction))
-					print('')
-					for i, v in pairs(keyfunction) do
-						print(i, v)
-					end
 					keyfunction(key) 
 				end
 			end)
@@ -130,7 +124,7 @@ function babgame:tick()
 end
 
 function babgame:update(drawfunction)
-	--while true do
+	while true do
 		for _, v in pairs(self.screen.data) do
 			if self.screen.getPixel(v.pos2) ~= self.backgroundColor then
 				self.screen.setPixel(v.pos2, self.backgroundColor, false)
@@ -140,7 +134,7 @@ function babgame:update(drawfunction)
 		drawfunction()
 
 		self:tick()
-	--end
+	end
 end
 
 function babgame.getPaintTool()
