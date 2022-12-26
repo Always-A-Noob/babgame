@@ -124,17 +124,15 @@ function babgame:tick()
 end
 
 function babgame:update(drawfunction)
-	while true do
+	game:GetService('RunService').RenderStepped:Connect(function(dt)
 		for _, v in pairs(self.screen.data) do
 			if self.screen.getPixel(v.pos2) ~= self.backgroundColor then
 				self.screen.setPixel(v.pos2, self.backgroundColor, false)
 			end
 		end
 
-		drawfunction()
-
-		self:tick()
-	end
+		drawfunction(dt)
+	end)
 end
 
 function babgame.getPaintTool()
@@ -152,6 +150,7 @@ function babgame:paint(block, color, yield)
     	},
 	}
 
+	block.PrimaryPart.Color = color
 	if yield then
 		return self.getPaintTool().RF:InvokeServer(unpack(args))
 	else
