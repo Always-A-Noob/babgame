@@ -66,6 +66,8 @@ function babgame:load(TLcolor, BRcolor, TICKcolor, inc)
 
 	function self.screen.getPixel(pos2)
 		for _, v in pairs(self.screen) do
+			print(v.pos2)
+			print(pos2)
 			if v.pos2 == pos2 then
 				return v.block
 			end
