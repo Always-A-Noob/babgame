@@ -75,8 +75,8 @@ function babgame:load(TLcolor, BRcolor, TICKcolor, inc)
 		return nil
 	end
 
-	function self.keys:keyPressed(keys, keyfunction)
-		for _, v in pairs(keys.data) do
+	function self.keys:keyPressed(keyfunction)
+		for _, v in pairs(self.keys.data) do
 			v.BulbEnd.PointLight.Changed:Connect(function(value) 
 				if value == 'Enabled' then 
 					local key = keycodes[v.BindFire.Value]
