@@ -2,6 +2,7 @@ local babgame = {}
 
 local player = game:GetService('Players').LocalPlayer
 local keycodes = {}
+
 for _, v in pairs(Enum.KeyCode:GetEnumItems()) do
 	keycodes[v.Value]=v
 end
@@ -78,6 +79,7 @@ function babgame:load(TLcolor, BRcolor, TICKcolor, inc)
 		for _, v in pairs(self.keys.data) do
 			v.BulbEnd.PointLight.Changed:Connect(function(value) 
 				if value == 'Enabled' then 
+					print(keycodes[v.BindFire.Value])
 					keyfunction(keycodes[v.BindFire.Value]) 
 				end
 			end)
@@ -156,7 +158,9 @@ function babgame:paint(block, color, yield)
 	if yield then
 		return self.getPaintTool().RF:InvokeServer(unpack(args))
 	else
-		self.getPaintTool().RF:InvokeServer(unpack(args))
+		spawn(function()
+			self.getPaintTool().RF:InvokeServer(unpack(args))
+		end)
 		return nil
 	end
 end
