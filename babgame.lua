@@ -55,7 +55,7 @@ function babgame:load(TLcolor, BRcolor, TICKcolor, inc)
 	getMyBlocks(getGameBlocks)
 
 	function self.screen.setPixel(pos2, color, yield)
-		for _, v in pairs(self.screen) do
+		for _, v in pairs(self.screen.data) do
 			if v.pos2 == pos2 then
 				return self:paint(v, color, yield)
 			end
@@ -65,9 +65,7 @@ function babgame:load(TLcolor, BRcolor, TICKcolor, inc)
 	end
 
 	function self.screen.getPixel(pos2)
-		for _, v in pairs(self.screen) do
-			print(v.pos2)
-			print(pos2)
+		for _, v in pairs(self.screen.data) do
 			if v.pos2 == pos2 then
 				return v.block
 			end
@@ -127,10 +125,6 @@ function babgame:update(drawfunction)
 	--while true do
 		for _, v in pairs(self.screen.data) do
 			spawn(function()
-				print(v)
-				print(#v)
-				print(v.pos2)
-				print(v.block)
 				if self.screen.getPixel(v.pos2) ~= self.backgroundColor then
 					self.screen.setPixel(v.pos2, self.backgroundColor)
 				end
