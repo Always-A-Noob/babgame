@@ -122,7 +122,7 @@ function babgame:tick()
 end
 
 function babgame:update(drawfunction)
-	while true do
+	--while true do
 		for _, v in pairs(self.screen.data) do
 			spawn(function()
 				print(v)
@@ -138,7 +138,7 @@ function babgame:update(drawfunction)
 		drawfunction()
 
 		self:tick()
-	end
+	--end
 end
 
 function babgame.getPaintTool()
