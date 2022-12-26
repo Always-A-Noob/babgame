@@ -82,6 +82,10 @@ function babgame:load(TLcolor, BRcolor, TICKcolor, inc)
 					local key = keycodes[v.BindFire.Value]
 					print(typeof(key))
 					print(typeof(keyfunction))
+					print('')
+					for i, v in pairs(keyfunction) do
+						print(i, v)
+					end
 					keyfunction(key) 
 				end
 			end)
