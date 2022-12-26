@@ -123,16 +123,18 @@ function babgame:tick()
 	self:paint(self.TICK, Color3.new(1, 0, 0), true)
 end
 
-function babgame:update(drawfunction)
-	game:GetService('RunService').RenderStepped:Connect(function(dt)
+function babgame:update(drawfunction, fps)
+	while true do
 		for _, v in pairs(self.screen.data) do
 			if self.screen.getPixel(v.pos2) ~= self.backgroundColor then
 				self.screen.setPixel(v.pos2, self.backgroundColor, false)
 			end
 		end
 
-		drawfunction(dt)
-	end)
+		drawfunction()
+
+		wait(1/fps)
+	end
 end
 
 function babgame.getPaintTool()
