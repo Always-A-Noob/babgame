@@ -124,11 +124,9 @@ end
 function babgame:update(drawfunction)
 	--while true do
 		for _, v in pairs(self.screen.data) do
-			spawn(function()
-				if self.screen.getPixel(v.pos2) ~= self.backgroundColor then
-					self.screen.setPixel(v.pos2, self.backgroundColor)
-				end
-			end)
+			if self.screen.getPixel(v.pos2) ~= self.backgroundColor then
+				self.screen.setPixel(v.pos2, self.backgroundColor, false)
+			end
 		end
 
 		drawfunction()
