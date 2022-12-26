@@ -57,7 +57,7 @@ function babgame:load(TLcolor, BRcolor, TICKcolor, inc)
 	function self.screen.setPixel(pos2, color, yield)
 		for _, v in pairs(self.screen.data) do
 			if v.pos2 == pos2 then
-				return self:paint(v, color, yield)
+				return self:paint(v.block, color, yield)
 			end
 		end
 
